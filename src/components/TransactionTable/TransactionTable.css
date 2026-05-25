@@ -1,0 +1,48 @@
+.transaction-table {
+  width: 90%;
+  margin: 0 2rem;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.transaction-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background-color: #f9fafb;
+  color: #6b7280;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.transaction-table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  color: #111827;
+}
+
+.transaction-table tr:hover {
+  background-color: #f9fafb;
+}
+
+.type-income { color: #16a34a; font-weight: 600; }
+.type-expense { color: #dc2626; font-weight: 600; }
+
+.status-completed {
+  background-color: #dcfce7;
+  color: #16a34a;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-pending {
+  background-color: #fef9c3;
+  color: #ca8a04;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
