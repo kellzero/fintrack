@@ -1,3 +1,5 @@
+import './SummaryCard.css'
+
 interface SummaryCardProps {
   title: string
   value: number
