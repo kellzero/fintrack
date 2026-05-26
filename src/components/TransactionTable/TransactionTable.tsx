@@ -1,15 +1,9 @@
 import './TransactionTable.css'
+import type { Transaction } from '../../types'
 
 
 
 
-interface Transaction {
-    name: string
-    value: number
-    date: string
-    type: 'income' | 'expense'
-    status: 'pending' | 'completed'
-}
 interface TransactionTableProps {
     transactions: Transaction[]
 }
