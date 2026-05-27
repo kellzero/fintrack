@@ -17,14 +17,17 @@ const [transactions, setTransactions] = useState<Transaction[]>([
 function handleAddTransaction(transaction: Transaction) {
   setTransactions([...transactions, transaction])
 }
+const totalIncome = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.value, 0)
+const totalExpense = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.value, 0)
+const totalBalance = totalIncome - totalExpense
   
   return(
     <div>
       <Navbar />
       <div className="summary-cards">
-        <SummaryCard title="Income" value={1000} type="income" />
-        <SummaryCard title="Expense" value={500} type="expense" />
-        <SummaryCard title="Balance" value={500} type="balance" />
+        <SummaryCard title="Income" value={totalIncome} type="income" />
+        <SummaryCard title="Expense" value={totalExpense} type="expense" />
+        <SummaryCard title="Balance" value={totalBalance} type="balance" />
       </div>
       <TransactionForm onAdd={handleAddTransaction} />
       <TransactionTable transactions={transactions} />

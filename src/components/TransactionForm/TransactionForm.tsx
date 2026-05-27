@@ -18,6 +18,10 @@ function TransactionForm({ onAdd }: TransactionFormProps) {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         onAdd({ name, value, date, type, status: 'pending' })
+        setName('')
+        setValue(0)
+        setDate('')
+        setType('income')
     }
   return (
     <div>
