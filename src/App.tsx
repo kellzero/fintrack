@@ -1,24 +1,31 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import type { Transaction } from "./types"
 import Navbar from "./components/Navbar/Navbar"
 import SummaryCard from "./components/SummaryCard/SummaryCard"
 import TransactionTable from "./components/TransactionTable/TransactionTable"
 import TransactionForm from "./components/TransactionForm/TransactionForm"
+import {getTransactions, createTransaction} from "./services/api"
+
 
 
 
 
 function App() {
-const [transactions, setTransactions] = useState<Transaction[]>([
-  { name: 'Salary', value: 5000, date: '2024-01-01', type: 'income', status: 'pending' },
-  { name: 'Groceries', value: 200, date: '2024-01-02', type: 'expense', status: 'pending' },
-])
+const [transactions, setTransactions] = useState<Transaction[]>([])
+useEffect(() => {
+  async function fetchTransactions() {
+    const data = await getTransactions()
+    setTransactions(data)
+  }
+  fetchTransactions()
+}, [])
 
-function handleAddTransaction(transaction: Transaction) {
-  setTransactions([...transactions, transaction])
+async function handleAddTransaction(transaction: Transaction) {
+  const newTransaction = await createTransaction(transaction)
+  setTransactions([...transactions, newTransaction])
 }
-const totalIncome = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.value, 0)
-const totalExpense = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.value, 0)
+const totalIncome = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + Number(t.value), 0)
+const totalExpense = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + Number(t.value), 0)
 const totalBalance = totalIncome - totalExpense
   
   return(

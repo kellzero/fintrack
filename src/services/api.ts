@@ -1,0 +1,23 @@
+const BASE_URL = 'http://localhost:8000/api'
+
+export async function getTransactions() {
+    const response = await fetch(`${BASE_URL}/transactions`)
+    return response.json()
+}
+
+export async function createTransaction(transaction: {
+    name: string
+    value: number
+    date: string
+    type: string
+    status: string
+}) {
+    const response = await fetch(`${BASE_URL}/transactions/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(transaction),
+    })
+    return response.json()
+}

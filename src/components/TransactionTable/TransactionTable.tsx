@@ -24,7 +24,7 @@ function TransactionTable({ transactions }: TransactionTableProps) {
                 {transactions.map((transaction) => (
                     <tr key={transaction.name}>
                         <td>{transaction.name}</td>
-                        <td>R${transaction.value.toFixed(2)}</td>
+                        <td>R${Number(transaction.value).toFixed(2)}</td>
                         <td>{transaction.date}</td>
                         <td className={`type-${transaction.type}`}>{transaction.type}</td>
                         <td className={`status-${transaction.status}`}>{transaction.status}</td>

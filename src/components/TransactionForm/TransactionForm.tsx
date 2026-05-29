@@ -6,7 +6,7 @@ import './TransactionForm.css'
 
 
 interface TransactionFormProps {
-    onAdd : (transaction: Transaction) => void
+    onAdd : (transaction: Transaction) => void | Promise<void>
 }
 
 
