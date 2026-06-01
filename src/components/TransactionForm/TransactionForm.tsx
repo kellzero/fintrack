@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type ChangeEvent} from 'react'
+import { useState, type ChangeEvent} from 'react'
 import type { Transaction } from '../../types'
 import './TransactionForm.css'
 
