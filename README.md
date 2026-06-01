@@ -4,7 +4,7 @@ Aplicação web full stack para controle financeiro pessoal. Permite registrar t
 
 ## 🖥️ Demo
 
-> Link do deploy (em breve)
+> https://fintrack-five-woad.vercel.app
 
 ## ✨ Funcionalidades
 
