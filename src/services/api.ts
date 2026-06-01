@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8000/api'
+const BASE_URL = 'https://fintrack-api-hdfk.onrender.com/api'
 
 export async function getTransactions() {
     const response = await fetch(`${BASE_URL}/transactions`)
