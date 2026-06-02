@@ -21,3 +21,7 @@ export async function createTransaction(transaction: {
     })
     return response.json()
 }
+
+export async function deleteTransaction(id: number) {
+    await fetch(`${BASE_URL}/transactions/${id}/`, { method: 'DELETE', })
+}

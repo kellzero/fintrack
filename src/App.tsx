@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar/Navbar"
 import SummaryCard from "./components/SummaryCard/SummaryCard"
 import TransactionTable from "./components/TransactionTable/TransactionTable"
 import TransactionForm from "./components/TransactionForm/TransactionForm"
-import {getTransactions, createTransaction} from "./services/api"
+import {getTransactions, createTransaction, deleteTransaction} from "./services/api"
 
 
 
@@ -24,6 +24,10 @@ async function handleAddTransaction(transaction: Transaction) {
   const newTransaction = await createTransaction(transaction)
   setTransactions([...transactions, newTransaction])
 }
+async function handleDeleteTransaction(id: number) {
+  await deleteTransaction(id)
+  setTransactions(transactions.filter(t => t.id !== id))
+}
 const totalIncome = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + Number(t.value), 0)
 const totalExpense = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + Number(t.value), 0)
 const totalBalance = totalIncome - totalExpense
@@ -37,7 +41,7 @@ const totalBalance = totalIncome - totalExpense
         <SummaryCard title="Balance" value={totalBalance} type="balance" />
       </div>
       <TransactionForm onAdd={handleAddTransaction} />
-      <TransactionTable transactions={transactions} />
+      <TransactionTable transactions={transactions} onDelete={handleDeleteTransaction} />
     </div>
   )
 }

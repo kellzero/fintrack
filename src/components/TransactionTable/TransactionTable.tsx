@@ -6,9 +6,10 @@ import type { Transaction } from '../../types'
 
 interface TransactionTableProps {
     transactions: Transaction[]
+    onDelete?: (id: number) => void
 }
 
-function TransactionTable({ transactions }: TransactionTableProps) {
+function TransactionTable({ transactions, onDelete }: TransactionTableProps) {
     return (
         <table className="transaction-table">
             <thead>
@@ -18,16 +19,24 @@ function TransactionTable({ transactions }: TransactionTableProps) {
                     <th>Date</th>
                     <th>Type</th>
                     <th>Status</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {transactions.map((transaction) => (
-                    <tr key={transaction.name}>
+                    <tr key={transaction.id}>
                         <td>{transaction.name}</td>
                         <td>R${Number(transaction.value).toFixed(2)}</td>
                         <td>{transaction.date}</td>
                         <td className={`type-${transaction.type}`}>{transaction.type}</td>
                         <td className={`status-${transaction.status}`}>{transaction.status}</td>
+                        {onDelete && (
+                            <td>
+                                <button onClick={() => onDelete(transaction.id!)}>
+                                    Delete
+                                </button>
+                            </td>
+                        )}
                     </tr>
                 ))}
             </tbody>
