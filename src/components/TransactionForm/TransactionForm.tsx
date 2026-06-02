@@ -10,20 +10,33 @@ interface TransactionFormProps {
 }
 
 
-
 function TransactionForm({ onAdd }: TransactionFormProps) {
-    const [name, setName] = useState('')
-    const [value, setValue] = useState(0)
-    const [date, setDate] = useState('')
-    const [type, setType] = useState<'income' | 'expense'>('income')
+  const [name, setName] = useState('')
+  const [value, setValue] = useState(0)
+  const [date, setDate] = useState('')
+  const [type, setType] = useState<'income' | 'expense'>('income')
+  const [error, setError] = useState({
+      name: false,
+      value: false,
+      date: false,
+  })
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        onAdd({ name, value, date, type, status: 'pending' })
-        setName('')
-        setValue(0)
-        setDate('')
-        setType('income')
+      const newError = {
+        name: !name,
+        value: value <= 0,
+        date: !date,
+      }
+      setError(newError)
+
+      if (newError.name || newError.value || newError.date) return
+
+      onAdd({ name, value, date, type, status: 'pending' })
+      setName('')
+      setValue(0)
+      setDate('')
+      setType('income')
     }
   return (
     <div className="form-container">
@@ -31,15 +44,15 @@ function TransactionForm({ onAdd }: TransactionFormProps) {
       <form onSubmit={handleSubmit} className="transaction-form">
         <label className="form-group">
           Name:
-          <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+          <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} className={error.name ? 'input-error' : ''} />
         </label>
         <label className="form-group">
           Value:
-          <input type="number" name="value" value={value} onChange={(e) => setValue(Number(e.target.value))} />
+          <input type="number" name="value" value={value} onChange={(e) => setValue(Number(e.target.value))} className={error.value ? 'input-error' : ''} />
         </label>
         <label className="form-group">
           Date:
-          <input type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          <input type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)} className={error.date ? 'input-error' : ''} />
         </label>
         <label className="form-group">
           Type:

@@ -50,6 +50,10 @@
   outline: none;
   transition: border-color 0.2s;
 }
+.input-error {
+  border-color: #dc2626 !important;
+  background-color: #fff5f5;
+}
 
 .form-group input:focus,
 .form-group select:focus {
