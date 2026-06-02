@@ -1,4 +1,5 @@
 # FinTrack — Sistema Financeiro
+![FinTrack Dashboard](./screenshot.png)
 
 Aplicação web full stack para controle financeiro pessoal. Permite registrar transações de entrada e saída, visualizar resumo financeiro e acompanhar o saldo em tempo real.
 
