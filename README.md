@@ -1,5 +1,6 @@
 # FinTrack — Sistema Financeiro
-![FinTrack Dashboard](./screenshot.png)
+![Login](./screenshot-login.webp)
+![Dashboard](./screenshot.png)
 
 Aplicação web full stack para controle financeiro pessoal. Permite registrar transações de entrada e saída, visualizar resumo financeiro e acompanhar o saldo em tempo real.
 
@@ -9,9 +10,12 @@ Aplicação web full stack para controle financeiro pessoal. Permite registrar t
 
 ## ✨ Funcionalidades
 
+- Autenticação com JWT — login e logout
+- Rotas protegidas — acesso só para usuários autenticados
 - Dashboard com resumo de entradas, saídas e saldo
 - Cadastro de transações com nome, valor, data e tipo
 - Tabela de transações com status e cores por tipo
+- Deletar transações
 - Cálculo automático de totais em tempo real
 
 ## 🚀 Tecnologias
@@ -19,6 +23,8 @@ Aplicação web full stack para controle financeiro pessoal. Permite registrar t
 - React 19
 - TypeScript
 - Vite
+- React Router v6
+- JWT Authentication
 - CSS Modules
 
 ## 🔧 Como rodar localmente
