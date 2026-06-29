@@ -1,4 +1,4 @@
-const BASE_URL = 'https://fintrack-api-hdfk.onrender.com/api'
+const BASE_URL = 'http://localhost:8000/api'
 
 function getToken() {
     return localStorage.getItem('access_token')
@@ -45,6 +45,21 @@ export async function createTransaction(transaction: {
 }) {
     const response = await fetch(`${BASE_URL}/transactions/`, {
         method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify(transaction),
+    })
+    return response.json()
+}
+
+export async function updateTransaction(id: number, transaction: {
+    name: string
+    value: number
+    date: string
+    type: string
+    status: string
+}) {
+    const response = await fetch(`${BASE_URL}/transactions/${id}/`, {
+        method: 'PUT',
         headers: authHeaders(),
         body: JSON.stringify(transaction),
     })

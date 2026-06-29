@@ -1,27 +1,45 @@
-import { useState, type ChangeEvent} from 'react'
+import { useEffect, useState, type ChangeEvent} from 'react'
 import type { Transaction } from '../../types'
 import './TransactionForm.css'
+import { updateTransaction } from '../../services/api'
 
 
 
 
 interface TransactionFormProps {
     onAdd : (transaction: Transaction) => void | Promise<void>
+    onEdit?: (transaction: Transaction) => void | Promise<void>
+    transactionToEdit?: Transaction
 }
 
 
-function TransactionForm({ onAdd }: TransactionFormProps) {
-  const [name, setName] = useState('')
-  const [value, setValue] = useState(0)
-  const [date, setDate] = useState('')
-  const [type, setType] = useState<'income' | 'expense'>('income')
+function TransactionForm({ onAdd, onEdit, transactionToEdit }: TransactionFormProps) {
+
+  useEffect(() => {
+    if (transactionToEdit) {
+      setName(transactionToEdit.name)
+      setValue(transactionToEdit.value)
+      setDate(transactionToEdit.date)
+      setType(transactionToEdit.type)
+    }else{
+      setName('')
+      setValue(0)
+      setDate('')
+      setType('income')
+    }
+  }, [transactionToEdit])
+
+  const [name, setName] = useState(transactionToEdit?.name ?? '')
+  const [value, setValue] = useState(transactionToEdit?.value ?? 0)
+  const [date, setDate] = useState(transactionToEdit?.date ?? '')
+  const [type, setType] = useState<'income' | 'expense'>(transactionToEdit?.type ?? 'income')
   const [error, setError] = useState({
       name: false,
       value: false,
       date: false,
   })
 
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
       const newError = {
         name: !name,
@@ -32,7 +50,15 @@ function TransactionForm({ onAdd }: TransactionFormProps) {
 
       if (newError.name || newError.value || newError.date) return
 
-      onAdd({ name, value, date, type, status: 'pending' })
+      if (transactionToEdit?.id) {
+        const updated = await updateTransaction(transactionToEdit.id, { name, value, date, type, status: transactionToEdit.status })
+        if (onEdit) onEdit(updated)
+
+
+      }else{
+        await onAdd({ name, value, date, type, status: 'pending' })
+      }
+
       setName('')
       setValue(0)
       setDate('')
