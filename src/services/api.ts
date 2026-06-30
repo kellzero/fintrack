@@ -41,7 +41,6 @@ export async function createTransaction(transaction: {
     value: number
     date: string
     type: string
-    status: string
 }) {
     const response = await fetch(`${BASE_URL}/transactions/`, {
         method: 'POST',
@@ -56,7 +55,6 @@ export async function updateTransaction(id: number, transaction: {
     value: number
     date: string
     type: string
-    status: string
 }) {
     const response = await fetch(`${BASE_URL}/transactions/${id}/`, {
         method: 'PUT',

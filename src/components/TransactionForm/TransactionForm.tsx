@@ -51,12 +51,12 @@ function TransactionForm({ onAdd, onEdit, transactionToEdit }: TransactionFormPr
       if (newError.name || newError.value || newError.date) return
 
       if (transactionToEdit?.id) {
-        const updated = await updateTransaction(transactionToEdit.id, { name, value, date, type, status: transactionToEdit.status })
+        const updated = await updateTransaction(transactionToEdit.id, { name, value, date, type})
         if (onEdit) onEdit(updated)
 
 
       }else{
-        await onAdd({ name, value, date, type, status: 'pending' })
+        await onAdd({ name, value, date, type })
       }
 
       setName('')

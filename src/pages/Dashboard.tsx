@@ -30,7 +30,6 @@ async function handleEditTransaction(updatedTransaction: Transaction) {
 }
 
 function handleSelectEdit(transaction: Transaction) {
-  console.log('Edit clicado:', transaction)
   setTransactionToEdit(transaction)
 }
 

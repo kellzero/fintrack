@@ -4,5 +4,4 @@ export interface Transaction {
     value: number
     date: string
     type: 'income' | 'expense'
-    status: 'pending' | 'completed'
 }

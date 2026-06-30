@@ -19,7 +19,6 @@ function TransactionTable({ transactions, onEdit, onDelete }: TransactionTablePr
                     <th>Value</th>
                     <th>Date</th>
                     <th>Type</th>
-                    <th>Status</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -31,7 +30,6 @@ function TransactionTable({ transactions, onEdit, onDelete }: TransactionTablePr
                         <td>R${Number(transaction.value).toFixed(2)}</td>
                         <td>{transaction.date}</td>
                         <td className={`type-${transaction.type}`}>{transaction.type}</td>
-                        <td className={`status-${transaction.status}`}>{transaction.status}</td>
                         {onEdit && (
                             <td>
                                 <button onClick={() => onEdit(transaction)}>
